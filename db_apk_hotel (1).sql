@@ -1,11 +1,14 @@
+CREATE DATABASE IF NOT EXISTS db__hotel;
+USE db__hotel;
+
 -- phpMyAdmin SQL Dump
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 14 Okt 2025 pada 16.26
--- Versi server: 10.4.32-MariaDB
--- Versi PHP: 8.2.12
+-- Generation Time: Oct 18, 2025 at 05:18 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +21,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db_apk_hotel`
+-- Database: `db__hotel`
 --
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `booking`
+-- Table structure for table `booking`
 --
 
 CREATE TABLE `booking` (
@@ -36,7 +39,7 @@ CREATE TABLE `booking` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `booking`
+-- Dumping data for table `booking`
 --
 
 INSERT INTO `booking` (`booking_id`, `user_id`, `hotel_id`, `booking_date`, `status`) VALUES
@@ -49,12 +52,14 @@ INSERT INTO `booking` (`booking_id`, `user_id`, `hotel_id`, `booking_date`, `sta
 ('B0007', 'U0007', 'H0007', '2025-10-04 11:00:00', 'pending'),
 ('B0008', 'U0008', 'H0008', '2025-10-03 19:10:00', 'confirmed'),
 ('B0009', 'U0009', 'H0009', '2025-10-02 22:00:00', 'confirmed'),
-('B0010', 'U0010', 'H0010', '2025-10-01 07:40:00', 'pending');
+('B0010', 'U0010', 'H0010', '2025-10-01 07:40:00', 'pending'),
+('B0011', 'U0001', 'H0001', '2025-10-18 17:40:45', 'confirmed'),
+('B0012', 'U0001', 'H0001', '2025-10-18 21:18:10', 'confirmed');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `booking_detail`
+-- Table structure for table `booking_detail`
 --
 
 CREATE TABLE `booking_detail` (
@@ -69,7 +74,7 @@ CREATE TABLE `booking_detail` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `booking_detail`
+-- Dumping data for table `booking_detail`
 --
 
 INSERT INTO `booking_detail` (`detail_id`, `booking_id`, `room_id`, `check_in`, `check_out`, `price_per_night`, `total_price`, `special_request`) VALUES
@@ -82,12 +87,14 @@ INSERT INTO `booking_detail` (`detail_id`, `booking_id`, `room_id`, `check_in`, 
 ('D0007', 'B0007', 'R0009', '2025-10-14', '2025-10-16', 1100000.00, 2200000.00, 'High floor'),
 ('D0008', 'B0008', 'R0010', '2025-10-18', '2025-10-19', 700000.00, 700000.00, 'Smoking room'),
 ('D0009', 'B0009', 'R0002', '2025-10-11', '2025-10-12', 1200000.00, 1200000.00, NULL),
-('D0010', 'B0010', 'R0004', '2025-10-09', '2025-10-11', 800000.00, 1600000.00, 'Quiet area');
+('D0010', 'B0010', 'R0004', '2025-10-09', '2025-10-11', 800000.00, 1600000.00, 'Quiet area'),
+('D0011', 'B0011', 'R0001', '2025-10-18', '0000-00-00', 750000.00, 3000000.00, NULL),
+('D0012', 'B0012', 'R0001', '2025-10-18', '0000-00-00', 750000.00, 2250000.00, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `hotel`
+-- Table structure for table `hotel`
 --
 
 CREATE TABLE `hotel` (
@@ -99,29 +106,29 @@ CREATE TABLE `hotel` (
   `star_rating` decimal(2,1) DEFAULT NULL,
   `available_room` int(11) DEFAULT NULL,
   `add_on` text DEFAULT NULL,
-  `image_url` varchar(255) DEFAULT NULL -- Added 'image_url' attribute
+  `image_url` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `hotel`
+-- Dumping data for table `hotel`
 --
 
 INSERT INTO `hotel` (`hotel_id`, `hotel_name`, `address`, `phone_no`, `email`, `star_rating`, `available_room`, `add_on`, `image_url`) VALUES
 ('H0001', 'Hotel Nusantara', 'Jl. Merdeka No.10, Jakarta', '021888111', 'nusantara@hotel.com', 4.5, 15, 'Free Breakfast', 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=500&h=300&fit=crop'),
-('H0002', 'Hotel Harmoni', 'Jl. Sudirman No.21, Bandung', '022777222', 'harmoni@hotel.com', 4.2, 20, 'Airport Pickup', 'https://images.unsplash.com/photo-1582719478252-6be440306231?w=500&h=300&fit=crop'),
+('H0002', 'Hotel Harmoni', 'Jl. Sudirman No.21, Bandung', '022777222', 'harmoni@hotel.com', 4.2, 20, 'Airport Pickup', 'https://images.unsplash.com/photo-1618773928121-c32242e63f39?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170'),
 ('H0003', 'Hotel Bahari', 'Jl. Pantai Indah No.3, Bali', '036177733', 'bahari@hotel.com', 5.0, 12, 'Ocean View', 'https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=500&h=300&fit=crop'),
 ('H0004', 'Hotel Gading', 'Jl. Gading Serpong, Tangerang', '021555666', 'gading@hotel.com', 4.0, 18, 'Gym Access', 'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=500&h=300&fit=crop'),
-('H0005', 'Hotel Sakura', 'Jl. Asia Afrika, Bandung', '022333444', 'sakura@hotel.com', 4.8, 10, 'Onsen Spa', 'https://images.unsplash.com/photo-1549488344-ecc908de4118?w=500&h=300&fit=crop'),
-('H0006', 'Hotel Mawar', 'Jl. Diponegoro No.8, Yogyakarta', '027433355', 'mawar@hotel.com', 3.9, 25, 'Free Parking', 'https://images.unsplash.com/photo-1496061320490-67c82301c29e?w=500&h=300&fit=crop'),
-('H0007', 'Hotel Mentari', 'Jl. Gatot Subroto No.5, Jakarta', '021998877', 'mentari@hotel.com', 4.1, 22, 'Rooftop Pool', 'https://images.unsplash.com/photo-1588722919321-ed110f7601f0?w=500&h=300&fit=crop'),
-('H0008', 'Hotel Kenari', 'Jl. Malioboro No.12, Yogyakarta', '027455566', 'kenari@hotel.com', 4.3, 16, 'Live Music', 'https://images.unsplash.com/photo-1563911302483-ef9e0480a6e0?w=500&h=300&fit=crop'),
-('H0009', 'Hotel Duyung', 'Jl. Sanur No.7, Bali', '036188899', 'duyung@hotel.com', 4.9, 14, 'Private Beach', 'https://images.unsplash.com/photo-1520250497591-112f9d6a2463?w=500&h=300&fit=crop'),
+('H0005', 'Hotel Sakura', 'Jl. Asia Afrika, Bandung', '022333444', 'sakura@hotel.com', 4.8, 10, 'Onsen Spa', 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170'),
+('H0006', 'Hotel Mawar', 'Jl. Diponegoro No.8, Yogyakarta', '027433355', 'mawar@hotel.com', 3.9, 25, 'Free Parking', 'https://images.unsplash.com/photo-1445019980597-93fa8acb246c?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1174'),
+('H0007', 'Hotel Mentari', 'Jl. Gatot Subroto No.5, Jakarta', '021998877', 'mentari@hotel.com', 4.1, 22, 'Rooftop Pool', 'https://images.unsplash.com/photo-1455587734955-081b22074882?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170'),
+('H0008', 'Hotel Kenari', 'Jl. Malioboro No.12, Yogyakarta', '027455566', 'kenari@hotel.com', 4.3, 16, 'Live Music', 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170'),
+('H0009', 'Hotel Duyung', 'Jl. Sanur No.7, Bali', '036188899', 'duyung@hotel.com', 4.9, 14, 'Private Beach', 'https://plus.unsplash.com/premium_photo-1661964402307-02267d1423f5?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1073'),
 ('H0010', 'Hotel Pelangi', 'Jl. Ahmad Yani No.20, Surabaya', '031223344', 'pelangi@hotel.com', 4.4, 17, 'Kids Zone', 'https://images.unsplash.com/photo-1540541338287-41700207dee6?w=500&h=300&fit=crop');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `payment`
+-- Table structure for table `payment`
 --
 
 CREATE TABLE `payment` (
@@ -134,7 +141,7 @@ CREATE TABLE `payment` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `payment`
+-- Dumping data for table `payment`
 --
 
 INSERT INTO `payment` (`payment_id`, `booking_id`, `amount`, `payment_date`, `payment_method`, `status`) VALUES
@@ -147,12 +154,45 @@ INSERT INTO `payment` (`payment_id`, `booking_id`, `amount`, `payment_date`, `pa
 ('P0007', 'B0007', 2200000.00, '2025-10-13 18:00:00', 'debit_card', 'unpaid'),
 ('P0008', 'B0008', 700000.00, '2025-10-17 20:00:00', 'cash', 'paid'),
 ('P0009', 'B0009', 1200000.00, '2025-10-10 13:00:00', 'credit_card', 'paid'),
-('P0010', 'B0010', 1600000.00, '2025-10-08 09:00:00', 'transfer', 'unpaid');
+('P0010', 'B0010', 1600000.00, '2025-10-08 09:00:00', 'transfer', 'unpaid'),
+('P0011', 'B0011', 3000000.00, '2025-10-18 17:40:45', 'cash', 'paid'),
+('P0012', 'B0012', 2250000.00, '2025-10-18 21:18:10', 'cash', 'paid');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `room`
+-- Table structure for table `review`
+--
+
+CREATE TABLE `review` (
+  `review_id` int(11) NOT NULL,
+  `user_id` varchar(5) NOT NULL,
+  `hotel_id` varchar(10) NOT NULL,
+  `rating` decimal(2,1) NOT NULL COMMENT 'Skala rating 1.0 sampai 5.0',
+  `comment` text DEFAULT NULL,
+  `review_date` datetime DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `review`
+--
+
+INSERT INTO `review` (`review_id`, `user_id`, `hotel_id`, `rating`, `comment`, `review_date`) VALUES
+(1, 'U0001', 'H0001', 4.5, 'Pelayanan sangat cepat dan kamar bersih. Sarapan lezat!', '2025-10-18 21:23:21'),
+(2, 'U0002', 'H0002', 4.2, 'Lokasi strategis, dekat pusat kota. Hanya saja kamar mandi sedikit tua.', '2025-10-18 21:23:21'),
+(3, 'U0003', 'H0003', 5.0, 'Pemandangan laut yang luar biasa dari vila! Pengalaman bintang 5 sejati.', '2025-10-18 21:23:21'),
+(4, 'U0004', 'H0004', 3.9, 'Fasilitas gym lengkap. Sayangnya, kamar agak sempit dari yang saya bayangkan.', '2025-10-18 21:23:21'),
+(5, 'U0006', 'H0006', 4.0, 'Hotel yang nyaman untuk keluarga. Tempat parkir luas dan gratis.', '2025-10-18 21:23:21'),
+(6, 'U0008', 'H0008', 4.5, 'Suka sekali dengan live music di lobby-nya. Kamar Deluxe juga sangat nyaman.', '2025-10-18 21:23:21'),
+(7, 'U0009', 'H0009', 5.0, 'Pantai pribadi yang indah dan tenang. Staf sangat ramah dan membantu.', '2025-10-18 21:23:21'),
+(8, 'U0001', 'H0007', 4.3, 'Kolam renang rooftop-nya keren! Sempurna untuk melihat matahari terbenam.', '2025-10-18 21:23:21'),
+(9, 'U0005', 'H0005', 4.8, 'Onsen Spa yang otentik dan menenangkan. Benar-benar pengalaman menginap yang mewah.', '2025-10-18 21:23:21'),
+(10, 'U0010', 'H0010', 4.1, 'Kids Zone sangat membantu! Anak-anak senang, orang tua juga santai.', '2025-10-18 21:23:21');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `room`
 --
 
 CREATE TABLE `room` (
@@ -164,7 +204,7 @@ CREATE TABLE `room` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `room`
+-- Dumping data for table `room`
 --
 
 INSERT INTO `room` (`room_id`, `hotel_id`, `room_type`, `price`, `availability`) VALUES
@@ -182,7 +222,7 @@ INSERT INTO `room` (`room_id`, `hotel_id`, `room_type`, `price`, `availability`)
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE `user` (
@@ -194,7 +234,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `user`
+-- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`user_id`, `name`, `email`, `password`, `role`) VALUES
@@ -214,7 +254,7 @@ INSERT INTO `user` (`user_id`, `name`, `email`, `password`, `role`) VALUES
 --
 
 --
--- Indeks untuk tabel `booking`
+-- Indexes for table `booking`
 --
 ALTER TABLE `booking`
   ADD PRIMARY KEY (`booking_id`),
@@ -222,7 +262,7 @@ ALTER TABLE `booking`
   ADD KEY `hotel_id` (`hotel_id`);
 
 --
--- Indeks untuk tabel `booking_detail`
+-- Indexes for table `booking_detail`
 --
 ALTER TABLE `booking_detail`
   ADD PRIMARY KEY (`detail_id`),
@@ -230,58 +270,83 @@ ALTER TABLE `booking_detail`
   ADD KEY `room_id` (`room_id`);
 
 --
--- Indeks untuk tabel `hotel`
+-- Indexes for table `hotel`
 --
 ALTER TABLE `hotel`
   ADD PRIMARY KEY (`hotel_id`);
 
 --
--- Indeks untuk tabel `payment`
+-- Indexes for table `payment`
 --
 ALTER TABLE `payment`
   ADD PRIMARY KEY (`payment_id`),
   ADD UNIQUE KEY `booking_id` (`booking_id`);
 
 --
--- Indeks untuk tabel `room`
+-- Indexes for table `review`
+--
+ALTER TABLE `review`
+  ADD PRIMARY KEY (`review_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `hotel_id` (`hotel_id`);
+
+--
+-- Indexes for table `room`
 --
 ALTER TABLE `room`
   ADD PRIMARY KEY (`room_id`),
   ADD KEY `hotel_id` (`hotel_id`);
 
 --
--- Indeks untuk tabel `user`
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`user_id`),
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- Ketidakleluasaan untuk tabel `booking`
+-- AUTO_INCREMENT for table `review`
+--
+ALTER TABLE `review`
+  MODIFY `review_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `booking`
 --
 ALTER TABLE `booking`
   ADD CONSTRAINT `booking_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE,
   ADD CONSTRAINT `booking_ibfk_2` FOREIGN KEY (`hotel_id`) REFERENCES `hotel` (`hotel_id`) ON DELETE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `booking_detail`
+-- Constraints for table `booking_detail`
 --
 ALTER TABLE `booking_detail`
   ADD CONSTRAINT `booking_detail_ibfk_1` FOREIGN KEY (`booking_id`) REFERENCES `booking` (`booking_id`) ON DELETE CASCADE,
   ADD CONSTRAINT `booking_detail_ibfk_2` FOREIGN KEY (`room_id`) REFERENCES `room` (`room_id`) ON DELETE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `payment`
+-- Constraints for table `payment`
 --
 ALTER TABLE `payment`
   ADD CONSTRAINT `payment_ibfk_1` FOREIGN KEY (`booking_id`) REFERENCES `booking` (`booking_id`) ON DELETE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `room`
+-- Constraints for table `review`
+--
+ALTER TABLE `review`
+  ADD CONSTRAINT `review_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `review_ibfk_2` FOREIGN KEY (`hotel_id`) REFERENCES `hotel` (`hotel_id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `room`
 --
 ALTER TABLE `room`
   ADD CONSTRAINT `room_ibfk_1` FOREIGN KEY (`hotel_id`) REFERENCES `hotel` (`hotel_id`) ON DELETE CASCADE;
