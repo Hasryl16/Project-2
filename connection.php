@@ -1,18 +1,14 @@
 <?php
-function getConnection(): mysqli {
-    $servername = "localhost"; // usually "localhost"
-    $username = "root";        // your MySQL username
-    $password = "1234";        // your MySQL password
-    $dbname = "db_hotel";      // your database name
-
-    // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    return $conn; // Return connection object for reuse
+$servername = getenv('DB_HOST') ?: 'mysql';
+$username = getenv('DB_USER') ?: 'root';
+$password = getenv('DB_PASSWORD') ?: '1234';
+$dbname = getenv('DB_NAME') ?: 'db__hotel';
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+ die("Connection failed: " . $conn->connect_error);
 }
+echo "Connected successfully using MySQLi (Object-oriented)";
+$conn->close();
 ?>
