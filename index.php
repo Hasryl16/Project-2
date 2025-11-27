@@ -20,5 +20,7 @@ include_once __DIR__ . '/connection.php';
     <?php include 'about.php'; ?>
     <?php include 'services.php'; ?>
     <?php include 'footer.php'; ?>
+
+    <H1>Halo semua</H1>
 </body>
 </html>
